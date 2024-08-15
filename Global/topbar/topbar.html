@@ -1,6 +1,7 @@
+<link rel="icon" href="https://raw.githubusercontent.com/Whitebone/Whitebone.github.io/d2637c978014fd8db883cf5b1a3d1921aa037779/Global/Assets/favicons/favicon-32x32.png" type="image/png">
+<link rel="manifest" href="/manifest.json"> <!-- Link to manifest file -->
+
 <nav class="topbar">
-<head> <link rel="icon" href="https://raw.githubusercontent.com/Whitebone/Whitebone.github.io/d2637c978014fd8db883cf5b1a3d1921aa037779/Global/Assets/favicons/favicon-32x32.png" type="image/png">
-</head>
     <ul>
         <li><img src="https://github.com/Whitebone/Whitebone.github.io/blob/d2637c978014fd8db883cf5b1a3d1921aa037779/Global/Assets/favicons/favicon-32x32.png?raw=true" alt="◌" class="favicon"></li>
         <li><a href="../../index.html">Home</a></li>
@@ -45,3 +46,17 @@
         text-decoration: underline; /* Optional: Add underline on hover */
     }
 </style>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch((error) => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        });
+    }
+</script>
