@@ -1,0 +1,15 @@
+{
+  "name": "Whitebone",
+  "short_name": "Whitebone",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#464E47",
+  "theme_color": "#464E47",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/Whitebone/Whitebone.github.io/d2637c978014fd8db883cf5b1a3d1921aa037779/Global/Assets/favicons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
