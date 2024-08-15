@@ -1,0 +1,181 @@
+/* Import Solway font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Solway:wght@400;700&display=swap');
+
+/* Dark mode color scheme */
+
+body {
+    background-color: #181818; /* Very dark background color for a sleek look */
+    color: #E0E0E0; /* Light text color for contrast */
+    font-family: 'Solway', serif; /* Using Solway font */
+    margin: 20px;
+    line-height: 1.6;
+    padding-top: 60px; /* Adjust to account for fixed topbar */
+}
+
+h1 {
+    text-align: center;
+    color: #1E90FF; /* Bright blue heading color */
+    font-family: 'Solway', serif; /* Apply Solway to h1 */
+    font-weight: 700; /* Bold for a modern touch */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5); /* Darker shadow for a sleek look */
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #333333; /* Dark border color */
+    text-align: center;
+}
+
+th {
+    background-color: #1E90FF; /* Table header background */
+    color: #FFFFFF; /* Table header text color */
+    font-weight: 700; /* Bold for emphasis */
+}
+
+td {
+    background-color: #242424; /* Slightly lighter dark background for table data */
+}
+
+tr:nth-child(even) td {
+    background-color: #2C2C2C; /* Darker alternating rows */
+}
+
+tr:hover td {
+    background-color: #333333; /* Subtle hover effect */
+    color: #E0E0E0; /* Light text color on hover */
+}
+
+@media (max-width: 600px) {
+    body {
+        margin: 10px;
+    }
+
+    table, th, td {
+        display: block;
+        width: 100%;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        text-align: right;
+    }
+
+    tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+}
+
+/* Dark mode styles for event cards */
+#event-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible card layout with equal columns per row */
+    gap: 15px; /* Slightly larger gap for a more spacious look */
+    padding: 20px;
+    justify-items: center; /* Center cards within each grid cell */
+}
+
+.event-card {
+    background-color: #1E1E1E; /* Dark background color for cards */
+    color: #E0E0E0; /* Light text color for cards */
+    padding: 20px;
+    border-radius: 12px; /* Subtle rounding for a modern feel */
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s, outline-color 0.3s; /* Transition for a smoother effect */
+    max-width: 300px; /* Limit maximum width of cards */
+    width: 100%; /* Ensure cards take full width of their grid cell */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin: auto; /* Center the card horizontally in its grid cell */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
+    outline: 2px solid #333333; /* Subtle dark outline color */
+    font-family: 'Solway', serif; /* Apply Solway to event cards */
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* More pronounced shadow on hover */
+    outline: 2px solid #555555; /* Slightly lighter dark outline on hover */
+}
+
+.event-card h2 {
+    margin-top: 0;
+    color: #1E90FF; /* Heading color for cards */
+}
+
+.event-card .event-image {
+    width: 100px; /* Width of the image */
+    height: auto; /* Maintain aspect ratio */
+    margin: 10px 0;
+}
+
+.event-card p {
+    margin: 10px 0;
+}
+
+.event-card .countdown {
+    font-weight: 700; /* Bold for emphasis */
+    color: #FF8C00; /* Countdown highlight color */
+}
+
+.event-card .tag {
+    font-size: 1.2em; /* Larger text for tag */
+    color: #1E90FF; /* Tag color */
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 900px) {
+    #event-section {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* More flexible column count on medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    #event-section {
+        grid-template-columns: 1fr; /* 1 card per row on small screens */
+    }
+}
+
+/* Topbar styles */
+.topbar {
+    background-color: #1E1E1E; /* Dark background color for the topbar */
+    color: #E0E0E0; /* Light text color for the topbar */
+    padding: 10px 20px; /* Padding around the topbar */
+    position: fixed; /* Fixed position at the top */
+    width: 100%; /* Full width */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    z-index: 1000; /* Ensure it stays on top of other content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.topbar ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Flex layout for horizontal alignment */
+    justify-content: center; /* Center the items */
+}
+
+.topbar li {
+    margin: 0 15px; /* Spacing between menu items */
+}
+
+.topbar a {
+    color: #E0E0E0; /* Light text color for links */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+}
+
+.topbar a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

@@ -1,0 +1,34 @@
+/* Topbar styles */
+.topbar {
+    background-color: #0056b3; /* Match the header color */
+    color: #FFFFFF; /* Text color for the topbar */
+    padding: 10px 20px; /* Padding around the topbar */
+    position: fixed; /* Fixed position at the top */
+    width: 100%; /* Full width */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    z-index: 1000; /* Ensure it stays on top of other content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.topbar ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Flex layout for horizontal alignment */
+    justify-content: center; /* Center the items */
+}
+
+.topbar li {
+    margin: 0 15px; /* Spacing between menu items */
+}
+
+.topbar a {
+    color: #FFFFFF; /* Text color for links */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+}
+
+.topbar a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
