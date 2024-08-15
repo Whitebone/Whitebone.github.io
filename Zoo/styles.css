@@ -1,0 +1,125 @@
+/* Import Solway font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Solway:wght@400;700&display=swap');
+
+/* Light mode color scheme */
+
+body {
+    background-color: #FEEFEF; /* Very light red background color */
+    color: #333333; /* Text color */
+    font-family: 'Solway', serif; /* Using Solway font */
+    margin: 20px;
+    line-height: 1.6;
+    padding-top: 60px; /* Adjust to account for fixed topbar */
+}
+
+h1 {
+    text-align: center;
+    color: #007BFF; /* Bright blue heading color */
+    font-family: 'Solway', serif; /* Apply Solway to h1 */
+}
+
+p {
+    text-align: center;
+    color: #46acff; /* Decent color for paragraph text */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Light shadow for a subtle effect */
+}
+
+th, td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #007BFF; /* Table header background */
+    color: #FFFFFF; /* Table header text color */
+    font-weight: bold;
+}
+
+td {
+    background-color: #E9ECEF; /* Table data background */
+}
+
+tr:nth-child(even) td {
+    background-color: #FEEFEF; /* Light alternating rows with red tint */
+}
+
+tr:hover td {
+    background-color: #FFC107; /* Row highlight color */
+    color: #333333; /* Dark text color on hover */
+}
+
+/* Updated styles for event cards */
+#event-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible card layout with equal columns per row */
+    gap: 10px; /* Gap between cards */
+    padding: 20px;
+    justify-items: center; /* Center cards within each grid cell */
+}
+
+.event-card {
+    background-color: #FFFFFF; /* Card background color */
+    color: #333333; /* Card text color */
+    padding: 20px;
+    border-radius: 10px; /* Subtle rounding for a modern feel */
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s, outline-color 0.3s; /* Transition for a smoother effect */
+    max-width: 300px; /* Limit maximum width of cards */
+    width: 100%; /* Ensure cards take full width of their grid cell */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin: auto; /* Center the card horizontally in its grid cell */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow with a subtle gray color */
+    outline: 4px solid #FFC107; /* Amber outline color */
+    font-family: 'Solway', serif; /* Apply Solway to event cards */
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly more pronounced shadow on hover */
+    outline: 2px solid rgba(255, 193, 7, 0.8); /* More prominent amber outline on hover */
+}
+
+.event-card h2 {
+    margin-top: 0;
+    color: #007BFF; /* Heading color for cards */
+}
+
+.event-card .event-image {
+    width: 100px; /* Width of the image */
+    height: auto; /* Maintain aspect ratio */
+    margin: 10px 0;
+}
+
+.event-card p {
+    margin: 10px 0;
+}
+
+.event-card .countdown {
+    font-weight: bold;
+    color: #FFC107; /* Countdown highlight color */
+}
+
+.event-card .tag {
+    font-size: 1.2em; /* Larger text for tag */
+    color: #007BFF; /* Tag color */
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 900px) {
+    #event-section {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* More flexible column count on medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    #event-section {
+        grid-template-columns: 1fr; /* 1 card per row on small screens */
+    }
+}
