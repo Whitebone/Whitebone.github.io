@@ -1,3 +1,10 @@
+# If you're reading the source code, this is not part of the site; it's what I used to create the json with all the data and stuff
+#
+#
+
+
+
+
 import datetime
 import json
 
