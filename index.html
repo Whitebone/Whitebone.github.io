@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Event schedule with start and end times">
+    <meta name="author" content="Your Name">
+    <title>Event Schedule</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicon link -->
+    <link rel="icon" type="image/png" sizes="32x32" href="global assets/favicons/favicon-32x32.png">
+    <!-- Link to the topbar stylesheet -->
+    <link rel="stylesheet" href="Global/topbar/topbar.css">
+</head>
+<body>
+    <header>
+        <h1>Home</h1>
+        <body>Idk what to put here yet</body>
+    </header>
+    <div id="topbar-container"></div> <!-- Container for the topbar -->
+    <main>
+        <!-- Main content here -->
+    </main>
+    <footer>
+        <p> Made by Whitebone.</p>
+    </footer>
+    <script>
+        // Function to load the topbar
+        function loadTopbar() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'Global/topbar/topbar.html', true);
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    document.getElementById('topbar-container').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Load the topbar on page load
+        document.addEventListener('DOMContentLoaded', loadTopbar);
+    </script>
+</body>
+</html>
