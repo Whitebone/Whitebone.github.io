@@ -1,99 +1,223 @@
 /* Import Solway font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Solway:wght@400;700&display=swap');
 
-/* Light mode color scheme */
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Solway', serif;
+}
 
 body {
-    background-color: #FEEFEF; /* Very light red background color */
-    color: #333333; /* Text color */
-    font-family: 'Solway', serif; /* Using Solway font */
-    margin: 20px;
+    background-color: #1e1e1e; /* Dark background color */
+    color: #f5f5f5; /* Light text color */
     line-height: 1.6;
+    overflow-x: hidden;
     padding-top: 60px; /* Adjust to account for fixed topbar */
 }
 
+/* Header Styles */
 h1 {
+    background: #2c2c2c; 
+    color: #7bff61;
+    padding: 40px 0;
     text-align: center;
-    color: #007BFF; /* Bright blue heading color */
-    font-family: 'Solway', serif; /* Apply Solway to h1 */
+    position: relative;
+    overflow: hidden;
+    
+}
+h3 {
+    background: #2c2c2c; 
+    color: #c7ffbb;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    
+}
+h2 {
+    background: #1b1b1b;
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    animation: fadeInUp 1.5s ease-out;
 }
 
-p {
-    text-align: center;
-    color: #46acff; /* Decent color for paragraph text */
+header .tagline {
+    font-style: italic;
+    font-size: 1.5em;
+    animation: fadeInUp 2s ease-out;
 }
 
-table {
+/* Keyframes */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Bio Styles */
+.bio {
+    background: #2c2c2c; /* Dark gray background for bio section */
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+    transform: scale(0.98);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bio:hover {
+    transform: scale(1);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.6);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    animation: slideIn 1s ease-out;
+}
+
+.profile-img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+    border: 5px solid #ff6f61; /* Coral border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.profile-info h2 {
+    margin-bottom: 10px;
+    color: #ff6f61; /* Coral color for profile heading */
+    font-size: 2em;
+    animation: fadeIn 1s ease-out;
+}
+
+.profile-info .role {
+    color: #8a8a8a; /* Light gray color for role */
+    margin-bottom: 10px;
+}
+
+.profile-info .description {
+    line-height: 1.8;
+}
+
+/* Details Styles */
+.details h3 {
+    border-bottom: 2px solid #ff6f61; /* Coral border for headings */
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    position: relative;
+    color: #ff6f61; /* Coral color for headings */
+    font-size: 1.5em;
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.details h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Light shadow for a subtle effect */
+    height: 3px;
+    background: #ff6f61; /* Coral underline */
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
 }
 
-th, td {
-    padding: 15px;
-    border: 1px solid #ddd;
-    text-align: center;
+.details h3:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
-th {
-    background-color: #007BFF; /* Table header background */
-    color: #FFFFFF; /* Table header text color */
-    font-weight: bold;
+.details ul {
+    list-style: none;
+    padding: 0;
 }
 
-td {
-    background-color: #E9ECEF; /* Table data background */
+.details ul li {
+    background: #3c3c3c; /* Dark gray background for list items */
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
-tr:nth-child(even) td {
-    background-color: #FEEFEF; /* Light alternating rows with red tint */
+.details ul li:hover {
+    background: #ffab91; /* Light coral background on hover */
+    color: #1e1e1e; /* Dark text color on hover */
+    transform: translateY(-5px);
 }
 
-tr:hover td {
-    background-color: #FFC107; /* Row highlight color */
-    color: #333333; /* Dark text color on hover */
+.details a {
+    color: #ff6f61; /* Coral color for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-/* Updated styles for event cards */
+.details a:hover {
+    color: #f5f5f5; /* Light text color on hover */
+}
+
+/* Event Cards */
 #event-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible card layout with equal columns per row */
-    gap: 10px; /* Gap between cards */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
     padding: 20px;
-    justify-items: center; /* Center cards within each grid cell */
+    justify-items: center;
 }
 
 .event-card {
-    background-color: #FFFFFF; /* Card background color */
-    color: #333333; /* Card text color */
+    background-color: #2c2c2c; /* Dark gray background for event cards */
+    color: #f5f5f5; /* Light text color */
     padding: 20px;
-    border-radius: 10px; /* Subtle rounding for a modern feel */
+    border-radius: 10px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s, outline-color 0.3s; /* Transition for a smoother effect */
-    max-width: 300px; /* Limit maximum width of cards */
-    width: 100%; /* Ensure cards take full width of their grid cell */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    margin: auto; /* Center the card horizontally in its grid cell */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow with a subtle gray color */
-    outline: 4px solid #FFC107; /* Amber outline color */
-    font-family: 'Solway', serif; /* Apply Solway to event cards */
+    transition: transform 0.3s, box-shadow 0.3s, outline-color 0.3s;
+    max-width: 300px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: 4px solid #ff6f61; /* Coral outline */
 }
 
 .event-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly more pronounced shadow on hover */
-    outline: 2px solid rgba(255, 193, 7, 0.8); /* More prominent amber outline on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    outline: 2px solid rgba(255, 111, 97, 0.8); /* More prominent coral outline on hover */
 }
 
 .event-card h2 {
     margin-top: 0;
-    color: #007BFF; /* Heading color for cards */
+    color: #b779ff; /* Coral color for card headings */
 }
 
 .event-card .event-image {
-    width: 100px; /* Width of the image */
-    height: auto; /* Maintain aspect ratio */
+    width: 100px;
+    height: auto;
     margin: 10px 0;
 }
 
@@ -103,23 +227,34 @@ tr:hover td {
 
 .event-card .countdown {
     font-weight: bold;
-    color: #FFC107; /* Countdown highlight color */
+    color: #ffab91; /* Light coral color for countdown */
 }
 
 .event-card .tag {
-    font-size: 1.2em; /* Larger text for tag */
-    color: #007BFF; /* Tag color */
+    font-size: 1.2em;
+    color: #ff6f61; /* Coral color for tags */
 }
 
-/* Responsive grid adjustments */
+/* Footer Styles */
+footer {
+    background: #2c2c2c; /* Dark gray background for footer */
+    color: #f5f5f5; /* Light text color */
+    text-align: center;
+    padding: 20px 0;
+    border-top: 2px solid #ff6f61; /* Coral border for footer */
+    margin-top: 30px;
+    animation: fadeInUp 2s ease-out;
+}
+
+/* Responsive Grid Adjustments */
 @media (max-width: 900px) {
     #event-section {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* More flexible column count on medium screens */
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
 
 @media (max-width: 600px) {
     #event-section {
-        grid-template-columns: 1fr; /* 1 card per row on small screens */
+        grid-template-columns: 1fr;
     }
 }
