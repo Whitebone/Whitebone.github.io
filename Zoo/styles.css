@@ -25,8 +25,9 @@ h1 {
     text-align: center;
     position: relative;
     overflow: hidden;
-    
+    animation: fadeIn 2s ease-out;
 }
+
 h3 {
     background: #2c2c2c; 
     color: #c7ffbb;
@@ -34,15 +35,18 @@ h3 {
     text-align: center;
     position: relative;
     overflow: hidden;
-    
+    animation: fadeIn 2s ease-out;
 }
+
 h2 {
     background: #1b1b1b;
     padding: 10px 0;
     text-align: center;
     position: relative;
     overflow: hidden;
+    animation: fadeIn 2s ease-out;
 }
+
 header h1 {
     font-size: 3em;
     margin-bottom: 10px;
@@ -56,6 +60,11 @@ header .tagline {
 }
 
 /* Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -77,6 +86,7 @@ header .tagline {
     overflow: hidden;
     transform: scale(0.98);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 2s ease-out;
 }
 
 .bio:hover {
@@ -162,6 +172,7 @@ header .tagline {
     border-radius: 8px;
     display: inline-block;
     transition: background 0.3s ease, transform 0.3s ease;
+    animation: fadeIn 2s ease-out;
 }
 
 .details ul li:hover {
@@ -202,6 +213,7 @@ header .tagline {
     margin: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     outline: 4px solid #ff6f61; /* Coral outline */
+    animation: fadeIn 2s ease-out;
 }
 
 .event-card:hover {
