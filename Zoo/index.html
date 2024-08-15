@@ -90,9 +90,34 @@
                         card.classList.add('event-card');
                         card.id = `event-${index}`;
 
+                        // Map event tags to static image paths
+                        let imagePath = 'assets/default.webp'; // Default image path if no match
+
+                        switch (event.tag) {
+                            case 'Blue Whale':
+                                imagePath = 'assets/blue_whale.webp';
+                                break;
+                            case 'Elephant':
+                                imagePath = 'assets/elephant.webp';
+                                break;
+                            case 'Giraffe':
+                                imagePath = 'assets/giraffe.webp';
+                                break;
+                            case 'Lion':
+                                imagePath = 'assets/lion.webp';
+                                break;
+                            case 'Monkey':
+                                imagePath = 'assets/monkey.webp';
+                                break;
+                            case 'Tiger':
+                                imagePath = 'assets/tiger.webp';
+                                break;
+                            // Add more cases if needed
+                        }
+
                         card.innerHTML = `
                             <h2>${formatDateRange(event.startTime, event.endTime)}</h2>
-                            <img src="assets/${event.tag.toLowerCase()}.webp" alt="${event.tag}" class="event-image">
+                            <img src="${imagePath}" alt="${event.tag}" class="event-image">
                             <p><strong>Start:</strong> ${event.startTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}</p>
                             <p><strong>End:</strong> ${event.endTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}</p>
                             <p><strong>Countdown:</strong> <span class="countdown">${calculateCountdown(event.startTime)}</span></p>
