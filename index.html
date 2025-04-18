@@ -1,1 +1,14 @@
-HLEP 
+<header id="topbar-placeholder"></header>
+<link rel="stylesheet" href="../Global/topbar/topbar.css">
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('../Global/topbar/topbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('topbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error fetching topbar:', error));
+    });
+</script>
+
+<a1> HLEP</a1>
