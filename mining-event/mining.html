@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyblock Event Tracker</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
 
@@ -68,75 +71,4 @@
                             <strong>EVENT:</strong> ${event.event.toUpperCase()} <br>
                             <strong>STARTED:</strong> <span class="stopwatch" data-start="${startTime}"></span> (<span class="start-time" data-time="${startTime}"></span>) <br>
                             <strong>LOBBY COUNT:</strong> ${event.lobby_count} <br>
-                            <strong>DOUBLE EVENT:</strong> ${event.is_double ? 'YES' : 'NO'} <br>
-                            <hr>
-                        `;
-                        contentDiv.appendChild(eventDiv);
-
-                        if (event.is_double) {
-                            notifyDoubleEvent();
-                        }
-                    });
-                }
-            }
-            startStopwatch();
-        }
-
-        function startStopwatch() {
-            setInterval(() => {
-                const currentTime = Date.now() + serverTimeOffset;
-                document.querySelectorAll('.stopwatch').forEach(element => {
-                    const startTime = parseInt(element.getAttribute('data-start'));
-                    const timeElapsed = Math.floor((currentTime - startTime) / 1000);
-                    const minutes = Math.floor(Math.abs(timeElapsed) / 60);
-                    const seconds = Math.abs(timeElapsed) % 60;
-                    if (timeElapsed < 0) {
-                        element.textContent = `Starts in ${minutes}m ${seconds}s`;
-                    } else {
-                        element.textContent = `${minutes}m ${seconds}s ago`;
-                    }
-                });
-
-                document.querySelectorAll('.start-time').forEach(element => {
-                    const eventTime = parseInt(element.getAttribute('data-time'));
-                    element.textContent = new Date(eventTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-                });
-            }, 1000);
-        }
-
-        function requestNotificationPermission() {
-            if (Notification.permission !== 'granted') {
-                Notification.requestPermission().then(permission => {
-                    if (permission === 'granted') {
-                        console.log('Notification permission granted');
-                    }
-                });
-            }
-        }
-
-        requestNotificationPermission();
-        setInterval(fetchData, 5000);
-        window.onload = fetchData;
-    </script>
-</head>
-<body>
-    <!-- Topbar placeholder -->
-    <header id="topbar-placeholder"></header>
-
-    <!-- Page Content -->
-    <h1 style="margin-top: 80px;">SKYBLOCK EVENT TRACKER</h1>
-    <div id="content">LOADING...</div>
-
-    <!-- Load Topbar HTML -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('../Global/topbar/topbar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('topbar-placeholder').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading topbar:', error));
-        });
-    </script>
-</body>
-</html>
+                            <strong>DOUBLE
