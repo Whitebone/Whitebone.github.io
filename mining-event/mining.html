@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyblock Event Tracker</title>
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
+
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../Global/topbar/topbar.css"> <!-- Topbar CSS -->
+
     <script>
         let serverTimeOffset = 0; // Offset between local and server time
 
@@ -18,9 +24,7 @@
                 const data = await response.json();
                 console.log('Fetched Data:', data);
                 
-                // Sync server time with local time
                 serverTimeOffset = data.data.curr_time - Date.now();
-                
                 displayData(data.data);
             } catch (error) {
                 console.error('ERROR FETCHING DATA:', error);
@@ -32,7 +36,7 @@
             if (Notification.permission === 'granted') {
                 new Notification('Double Powder Event is LIVE!', {
                     body: 'Get in quick before it ends!',
-                    icon: 'https://example.com/icon.png', // Optional: Replace with an actual icon URL
+                    icon: 'https://example.com/icon.png',
                 });
             }
         }
@@ -58,7 +62,7 @@
                         eventDiv.classList.add('event-box');
                         
                         const endTime = event.ends_at;
-                        const startTime = endTime - 600000; // Assuming events last ~10 minutes
+                        const startTime = endTime - 600000;
                         
                         eventDiv.innerHTML = ` 
                             <strong>EVENT:</strong> ${event.event.toUpperCase()} <br>
@@ -68,8 +72,7 @@
                             <hr>
                         `;
                         contentDiv.appendChild(eventDiv);
-                        
-                        // If it's a double event, notify the user
+
                         if (event.is_double) {
                             notifyDoubleEvent();
                         }
@@ -93,7 +96,7 @@
                         element.textContent = `${minutes}m ${seconds}s ago`;
                     }
                 });
-                
+
                 document.querySelectorAll('.start-time').forEach(element => {
                     const eventTime = parseInt(element.getAttribute('data-time'));
                     element.textContent = new Date(eventTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
@@ -111,15 +114,29 @@
             }
         }
 
-        // Request permission when the page loads
         requestNotificationPermission();
-
         setInterval(fetchData, 5000);
         window.onload = fetchData;
     </script>
 </head>
 <body>
+    <!-- Topbar placeholder -->
+    <header id="topbar-placeholder"></header>
+
+    <!-- Page Content -->
     <h1>SKYBLOCK EVENT TRACKER</h1>
     <div id="content">LOADING...</div>
+
+    <!-- Load Topbar HTML -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../Global/topbar/topbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('topbar-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading topbar:', error));
+        });
+    </script>
 </body>
 </html>
