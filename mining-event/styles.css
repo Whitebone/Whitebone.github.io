@@ -1,0 +1,78 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1e1e1e;
+    color: #c0c0c0;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.2em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #ff5c5c; /* Accent red */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 1.6em;
+    margin-top: 25px;
+    color: #4db8ff; /* Accent blue */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.event-box {
+    background: #2a2a2a;
+    padding: 18px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 550px;
+    border: 1px solid #3a3a3a;
+    transition: background-color 0.3s ease, border 0.3s ease;
+    color: #e0e0e0; /* Light text for better readability */
+}
+
+.event-box:nth-child(odd) {
+    background-color: #333333; /* Slightly different shade for odd elements */
+}
+
+.event-box h3 {
+    color: #ff5c5c; /* Accent red for subheadings */
+}
+
+.event-box p {
+    color: #b0b0b0; /* Subtle gray for regular text */
+}
+
+.event-box a {
+    color: #4db8ff; /* Accent blue for links */
+    text-decoration: none;
+}
+
+.event-box a:hover {
+    text-decoration: underline;
+}
+
+strong {
+    color: #ff5c5c; /* Accent red for emphasized text */
+    font-size: 1em;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .event-box {
+        width: 95%;
+    }
+}
