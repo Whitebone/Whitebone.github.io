@@ -1,0 +1,140 @@
+/* Universal Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling for full page */
+body {
+    font-family: 'Solway', serif;
+    background-color: #302443; /* Dark background */
+    color: #f0f2e7; /* Light text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+/* Content Styling */
+.content {
+    width: 100%;
+    max-width: 1200px;  /* Limit the width for larger screens */
+    margin: 0 auto;
+}
+
+/* Mode Info Section */
+.mode-info {
+    margin-bottom: 40px;
+}
+
+.mode-info p {
+    margin: 12px 0;
+}
+
+/* New label for 'Current Dream Mode' */
+.current-label {
+    font-size: 1.5rem; /* Smaller text for the label */
+    font-weight: 400;
+    color: #b6a3a0; /* Soft color for the label */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+/* Styling for the current mode */
+.current-mode {
+    font-size: 6rem; /* A larger size for the current mode */
+    font-weight: 800; /* Extra bold */
+    color: #f1d8b0; /* Soft goldish tone */
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 0 15px;  /* Add padding to ensure no tight fitting */
+    line-height: 1.2;  /* Slightly reduce line height to center better */
+}
+
+.next-mode {
+    font-size: 2rem;
+    font-weight: 500; /* Medium weight */
+    color: #f0f2e7;
+    margin-top: 15px;
+}
+
+.countdown {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #af7652;
+    margin-top: 10px;
+}
+
+/* Schedule Section */
+.schedule {
+    margin-top: 40px;
+}
+
+.schedule ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.schedule li {
+    font-size: 1rem; /* Adjust text size */
+    font-weight: 300;
+    color: #f0f2e7;
+    margin-top: 12px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2); /* Slight contrast for list items */
+    border-radius: 8px;
+}
+
+.schedule .mode-name {
+    font-weight: 500; /* Medium weight for mode name */
+    color: #f0f2e7;
+}
+
+.schedule .mode-date {
+    color: #b6a3a0;
+    margin-left: 10px;
+}
+
+.schedule .countdown {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #af7652;
+    margin-top: 6px;
+}
+
+/* Simple Animation for smooth fading */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .current-mode {
+        font-size: 4.5rem; /* Smaller for mobile */
+    }
+
+    .next-mode {
+        font-size: 1.6rem;
+    }
+
+    .countdown {
+        font-size: 1.2rem;
+    }
+
+    .schedule li {
+        font-size: 0.9rem; /* Adjust text size for mobile */
+        padding: 8px;
+    }
+}
