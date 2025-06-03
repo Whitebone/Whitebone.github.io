@@ -34,15 +34,6 @@
       }
     }
 
-    function notifyDoubleEvent() {
-      if (Notification.permission === "granted") {
-        new Notification("Double Powder Event is LIVE!", {
-          body: "Get in quick before it ends!",
-          icon: "https://example.com/icon.png",
-        });
-      }
-    }
-
     function displayData(data) {
       const contentDiv = document.getElementById("content");
       contentDiv.innerHTML = "";
@@ -75,8 +66,6 @@
               <hr>
             `;
             contentDiv.appendChild(eventDiv);
-
-            if (event.is_double) notifyDoubleEvent();
           });
         }
       }
@@ -110,17 +99,6 @@
       }, 1000);
     }
 
-    function requestNotificationPermission() {
-      if (Notification.permission !== "granted") {
-        Notification.requestPermission().then((permission) => {
-          if (permission === "granted") {
-            console.log("Notification permission granted");
-          }
-        });
-      }
-    }
-
-    requestNotificationPermission();
     setInterval(fetchData, 5000);
     window.onload = fetchData;
   </script>
