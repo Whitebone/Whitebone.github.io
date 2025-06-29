@@ -5,13 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skyblock Event Tracker</title>
 
-  <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="favicon.png" />
-
-  <!-- ✅ Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- ✅ Styles -->
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="../Global/topbar/topbar.css" />
 
@@ -57,8 +52,16 @@
             const endTime = event.ends_at;
             const startTime = endTime - 600000;
 
+            // Replace DOUBLE_POWDER with "Double Powder"
+            let eventName = event.event;
+            if (eventName === "DOUBLE_POWDER") {
+              eventName = "Double Powder";
+            } else {
+              eventName = eventName.replace(/_/g, " ").toUpperCase();
+            }
+
             eventDiv.innerHTML = `
-              <strong>EVENT:</strong> ${event.event.toUpperCase()} <br>
+              <strong>EVENT:</strong> ${eventName} <br>
               <strong>STARTED:</strong> <span class="stopwatch" data-start="${startTime}"></span> 
               (<span class="start-time" data-time="${startTime}"></span>) <br>
               <strong>LOBBY COUNT:</strong> ${event.lobby_count} <br>
@@ -104,14 +107,11 @@
   </script>
 </head>
 <body>
-  <!-- ✅ Topbar -->
   <header id="topbar-placeholder"></header>
 
-  <!-- ✅ Main Content -->
   <h1 style="margin-top: 80px;">SKYBLOCK EVENT TRACKER</h1>
   <div id="content">LOADING...</div>
 
-  <!-- ✅ Load Topbar HTML -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       fetch("../Global/topbar/topbar.html")
