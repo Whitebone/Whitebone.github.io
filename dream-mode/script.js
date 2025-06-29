@@ -1,15 +1,41 @@
-// Helper to convert to UTC (using UTC for consistency)
-function convertToUTC(date) {
-    return new Date(date.toISOString()); // Convert to UTC (ISO string representation)
+// Parse an EST date string (e.g. "2025-01-10 00:00:00") and return a UTC Date
+function parseESTToUTC(dateStr) {
+    const [year, month, day, hour, minute, second] = dateStr.split(/[- :]/).map(Number);
+
+    // EST is UTC-5 by default
+    let utcHour = hour + 5;
+
+    const estDate = new Date(Date.UTC(year, month - 1, day, utcHour, minute, second));
+
+    // Approximate DST boundaries for US
+    const dstStart = new Date(Date.UTC(year, 2, 8)); // Second Sunday in March
+    dstStart.setUTCDate(14 - dstStart.getUTCDay());
+
+    const dstEnd = new Date(Date.UTC(year, 10, 1)); // First Sunday in November
+    dstEnd.setUTCDate(7 - dstEnd.getUTCDay());
+
+    const isDST = estDate >= dstStart && estDate < dstEnd;
+
+    if (isDST) {
+        estDate.setUTCHours(estDate.getUTCHours() - 1); // Adjust to UTC-4
+    }
+
+    return estDate;
 }
 
-// Helper to format the date into Month Name and Day, in EST time (America/New_York)
-function formatDate(date) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(date).toLocaleDateString("en-US", options);
+// Format a date string from schedule.json to a readable EST date
+function formatDateEST(dateStr) {
+    const date = parseESTToUTC(dateStr);
+
+    return date.toLocaleDateString("en-US", {
+        timeZone: "America/New_York",
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
 }
 
-// Helper to calculate the countdown time (using UTC for synchronization)
+// Countdown calculator from UTC Date
 function calculateCountdown(targetDate) {
     const now = new Date();
     const timeDifference = targetDate - now;
@@ -24,29 +50,29 @@ function calculateCountdown(targetDate) {
     return `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 
-// Fetch the JSON file and process the data
+// Fetch and process schedule.json
 function updateSchedule() {
     fetch('schedule.json')
         .then(response => response.json())
         .then(schedule => {
-            const currentDate = convertToUTC(new Date()); // Use UTC to compare times
+            const currentDate = new Date();
             const modeInfoElement = document.getElementById('mode-info');
             const scheduleListElement = document.getElementById('schedule-list');
 
             let currentMode = null;
             let nextMode = null;
 
-            // Find the current mode and next mode
             schedule.forEach(item => {
-                const modeDate = convertToUTC(new Date(item.date)); // Ensure UTC conversion
+                const modeDate = parseESTToUTC(item.date);
+
                 if (modeDate <= currentDate) {
                     currentMode = item;
-                } else if (!nextMode || modeDate < convertToUTC(new Date(nextMode.date))) {
+                } else if (!nextMode || parseESTToUTC(item.date) < parseESTToUTC(nextMode.date)) {
                     nextMode = item;
                 }
             });
 
-            // Display the "Current Dream Mode" label and the current mode
+            // Display current mode
             if (currentMode) {
                 modeInfoElement.innerHTML = `
                     <p class="current-label">Current Dream Mode</p>
@@ -56,36 +82,35 @@ function updateSchedule() {
                 modeInfoElement.innerHTML = `<p>No mode is currently active.</p>`;
             }
 
-            // Display the next mode with countdown
+            // Display next mode with countdown
             if (nextMode) {
-                const nextModeDate = convertToUTC(new Date(nextMode.date)); // Ensure UTC conversion
+                const nextModeDate = parseESTToUTC(nextMode.date);
                 modeInfoElement.innerHTML += `
-                    <p class="next-mode">Next Mode: ${nextMode.mode} (${formatDate(nextMode.date)})</p>
+                    <p class="next-mode">Next Mode: ${nextMode.mode} (${formatDateEST(nextMode.date)})</p>
                     <p class="countdown">Starts in: ${calculateCountdown(nextModeDate)}</p>
                 `;
             } else {
                 modeInfoElement.innerHTML += `<p>No upcoming mode scheduled.</p>`;
             }
 
-            // Display the upcoming 7 modes
+            // Show next 7 scheduled modes
             const upcomingModes = schedule.filter(item => {
-                const modeDate = convertToUTC(new Date(item.date)); // Ensure UTC conversion
+                const modeDate = parseESTToUTC(item.date);
                 return modeDate >= currentDate;
             }).slice(0, 7);
 
-            scheduleListElement.innerHTML = ''; // Clear existing list items
+            scheduleListElement.innerHTML = ''; // Clear list
 
             upcomingModes.forEach(item => {
-                const modeDate = convertToUTC(new Date(item.date)); // Ensure UTC conversion
+                const modeDate = parseESTToUTC(item.date);
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `
                     <span class="mode-name">${item.mode}</span>
-                    <span class="mode-date">${formatDate(item.date)}</span>
+                    <span class="mode-date">${formatDateEST(item.date)}</span>
                     <span class="countdown">${calculateCountdown(modeDate)}</span>
                 `;
                 scheduleListElement.appendChild(listItem);
             });
-
         })
         .catch(error => {
             console.error('Error fetching schedule.json:', error);
@@ -93,8 +118,8 @@ function updateSchedule() {
         });
 }
 
-// Update the schedule every second
+// Refresh every second
 setInterval(updateSchedule, 1000);
 
-// Initial load
+// Initial call
 updateSchedule();
