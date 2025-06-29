@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <h1> </h1>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skyblock Event Tracker</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../Global/topbar/topbar.css" />
+</head>
+<body>
+  <h1>Skyblock Event Tracker</h1>
+
+  <div class="tracker-container">
+    <div class="tracker-box">
+      <h1>Foraging Events</h1>
+      <h2>Starlyn Contest</h2>
+      <div id="starlyn-content">Loading events...</div>
+    </div>
+
+    <div class="tracker-box">
+      <h1>Mining Events</h2>
+      <div id="skyblock-content">Loading...</div>
+    </div>
+  </div>
+
+  <script src="starlyn.js"></script>
+  <script src="skyblock.js"></script>
+</body>
+<body>
+  <header id="topbar-placeholder"></header>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("../Global/topbar/topbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("topbar-placeholder").innerHTML = data;
+        })
+        .catch((error) => console.error("Error loading topbar:", error));
+    });
+  </script>
+</body>
+</html>
+
