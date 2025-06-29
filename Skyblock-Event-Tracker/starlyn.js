@@ -1,3 +1,5 @@
+let countdownInterval = null;
+
 async function loadStarlynEvents() {
   try {
     const response = await fetch('event_schedule.json');
@@ -38,13 +40,13 @@ function displayStarlynEvents(eventTimestamps) {
     <strong>EVENT:</strong> Starlyn Contest <br>
     <strong>ENDS AT:</strong> 
     <span class="start-time">
-  ${eventTime.toLocaleString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true
-  })}
-</span><br>
+      ${eventTime.toLocaleString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      })}
+    </span><br>
 
     <strong>COUNTDOWN:</strong>
     <span class="countdown" data-time="${eventTime.getTime()}">Loading...</span>
@@ -52,35 +54,38 @@ function displayStarlynEvents(eventTimestamps) {
   `;
   contentDiv.appendChild(eventDiv);
 
-  startStarlynCountdown();
+  // Stop any previous countdowns before starting a new one
+  if (countdownInterval) clearInterval(countdownInterval);
+  startStarlynCountdown(eventTime.getTime());
 }
 
-function startStarlynCountdown() {
-  const countdownElements = document.querySelectorAll('#starlyn-content .countdown');
+function startStarlynCountdown(eventTimestamp) {
+  const countdownElement = document.querySelector('#starlyn-content .countdown');
 
   function updateCountdown() {
     const now = Date.now();
-    countdownElements.forEach(el => {
-      const eventTime = parseInt(el.getAttribute('data-time'));
-      const diffMs = eventTime - now;
+    const diffMs = eventTimestamp - now;
 
-      if (diffMs <= 0) {
-        el.textContent = 'Started';
-        el.style.color = '#555';
-        return;
-      }
+    if (diffMs <= 0) {
+      countdownElement.textContent = 'Ended';
+      countdownElement.style.color = '#888';
+      clearInterval(countdownInterval);
 
-      const totalSeconds = Math.floor(diffMs / 1000);
-      const hours = Math.floor(totalSeconds / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
+      // Wait 2s and refresh
+      setTimeout(loadStarlynEvents, 2000);
+      return;
+    }
 
-      el.textContent = `${hours}h ${minutes}m ${seconds}s`;
-    });
+    const totalSeconds = Math.floor(diffMs / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    countdownElement.textContent = `${hours}h ${minutes}m ${seconds}s`;
   }
 
   updateCountdown();
-  setInterval(updateCountdown, 1000);
+  countdownInterval = setInterval(updateCountdown, 1000);
 }
 
 window.addEventListener("load", loadStarlynEvents);

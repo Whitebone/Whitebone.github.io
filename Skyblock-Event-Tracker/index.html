@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <h1> </h1>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Skyblock Event Tracker</title>
@@ -11,6 +10,8 @@
   <link rel="stylesheet" href="../Global/topbar/topbar.css" />
 </head>
 <body>
+  <header id="topbar-placeholder"></header>
+
   <h1>Skyblock Event Tracker</h1>
 
   <div class="tracker-container">
@@ -21,17 +22,20 @@
     </div>
 
     <div class="tracker-box">
-      <h1>Mining Events</h2>
+      <h1>Mining Events</h1>
       <div id="skyblock-content">Loading...</div>
+    </div>
+
+    <div class="tracker-box">
+      <h1>Dark Auction</h1>
+      <h2>DA Timer</h2>
+      <div id="dark-auction-content">Loading...</div>
     </div>
   </div>
 
   <script src="starlyn.js"></script>
   <script src="skyblock.js"></script>
-</body>
-<body>
-  <header id="topbar-placeholder"></header>
-
+  <script src="dark_auction.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -45,4 +49,3 @@
   </script>
 </body>
 </html>
-
