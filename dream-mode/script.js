@@ -16,23 +16,22 @@ function parseESTToUTC(dateStr) {
     return estDate;
 }
 
-function formatDiscordTimestamp(dateStr, style = 'F') {
+// Format date using user's local timezone and include short timezone name
+function formatDateLocal(dateStr) {
     const date = parseESTToUTC(dateStr);
-    return `<t:${Math.floor(date.getTime() / 1000)}:${style}>`;
-}
-
-function formatDateEST(dateStr) {
-    const date = parseESTToUTC(dateStr);
-    // Format without timezone suffix
     return date.toLocaleString("en-US", {
-        timeZone: "America/New_York",
         year: 'numeric',
         month: 'long',
         day: 'numeric',
         hour: 'numeric',
         minute: '2-digit',
-        hour12: true
+        hour12: true,
     });
+}
+
+function formatDiscordTimestamp(dateStr, style = 'F') {
+    const date = parseESTToUTC(dateStr);
+    return `<t:${Math.floor(date.getTime() / 1000)}:${style}>`;
 }
 
 function calculateCountdown(targetDate) {
@@ -86,7 +85,7 @@ function buildScheduleList() {
         // Format lists
         const formatDatesList = (dates) => dates.map(d => {
             const discord = formatDiscordTimestamp(d.date);
-            const formatted = formatDateEST(d.date);
+            const formatted = formatDateLocal(d.date);
             return `<li><span class="mode-date" title="Click to copy Discord timestamp" data-discord="${discord}">${formatted}</span></li>`;
         }).join('');
 
@@ -98,7 +97,7 @@ function buildScheduleList() {
         li.innerHTML = `
             <div class="schedule-item-header">
                 <span class="mode-name">${mode}</span>
-                <span class="mode-date" title="Click to copy Discord timestamp" data-discord="${formatDiscordTimestamp(item.date)}">${formatDateEST(item.date)}</span>
+                <span class="mode-date" title="Click to copy Discord timestamp" data-discord="${formatDiscordTimestamp(item.date)}">${formatDateLocal(item.date)}</span>
                 <span class="countdown" title="Click to copy relative Discord timestamp" data-discord="${formatDiscordTimestamp(item.date, 'R')}">${calculateCountdown(parseESTToUTC(item.date))}</span>
             </div>
 
@@ -143,7 +142,7 @@ function updateCountdowns() {
     if (nextMode) {
         const nextModeDate = parseESTToUTC(nextMode.date);
         // Format the date string for display without GMT, as requested
-        const formattedDate = formatDateEST(nextMode.date);
+        const formattedDate = formatDateLocal(nextMode.date);
         // Also add a span around the date part for clickable copy with class "next-mode-date"
         modeInfoElement.innerHTML += `
             <p class="next-mode">Next Mode: ${nextMode.mode} 
