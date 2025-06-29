@@ -52,13 +52,16 @@
             const endTime = event.ends_at;
             const startTime = endTime - 600000;
 
-            // Replace DOUBLE_POWDER with "Double Powder"
             let eventName = event.event;
-            if (eventName === "DOUBLE_POWDER") {
-              eventName = "Double Powder";
-            } else {
-              eventName = eventName.replace(/_/g, " ").toUpperCase();
-            }
+
+if (eventName === "DOUBLE_POWDER") {
+  eventName = "Double Powder";
+} else if (eventName === "BETTER_TOGETHER") {
+  eventName = "Better Together";
+} else {
+  eventName = eventName.replace(/_/g, " ").toUpperCase();
+}
+
 
             eventDiv.innerHTML = `
               <strong>EVENT:</strong> ${eventName} <br>
