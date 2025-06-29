@@ -12,3 +12,24 @@
 </script>
 
 <a1> HLEP</a1>
+<style>
+  /* Make sure the container (like body) is positioned relative or fixed */
+  body {
+    position: relative; /* or 'fixed' if you want it relative to the viewport */
+    height: 100vh; /* full viewport height */
+    margin: 0; /* remove default margin */
+  }
+
+  /* Style the image to be fixed in bottom right */
+  #bottom-right-image {
+    position: fixed;  /* fixed to viewport */
+    bottom: 10px;     /* 10px from bottom */
+    right: 10px;      /* 10px from right */
+    width: 16px;      /* size */
+    height: 16px;
+    z-index: 1000;    /* ensure it’s on top */
+  }
+</style>
+
+<img id="bottom-right-image" src="starman.png" alt="Starman icon">
+
