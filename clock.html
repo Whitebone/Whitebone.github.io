@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { display: flex; flex-direction: column; align-items: center; font-family: sans-serif; padding-top: 50px; }
+        #clockCanvas { background-color: #fff; border: 2px solid #ccc; border-radius: 50%; }
+        button { margin-top: 30px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        #timeDisplay { margin-top: 20px; font-size: 24px; font-weight: bold; visibility: hidden; }
+    </style>
+</head>
+<body>
+
+<canvas id="clockCanvas" width="300" height="300"></canvas>
+
+<button id="mainBtn" onclick="handleButtonClick()">New Time / Reveal</button>
+<div id="timeDisplay">00:00</div>
+
+<script>
+    const canvas = document.getElementById('clockCanvas');
+    const ctx = canvas.getContext('2d');
+    const timeDisplay = document.getElementById('timeDisplay');
+    let currentH, currentM;
+
+    function drawClock() {
+        ctx.clearRect(0, 0, 300, 300);
+        
+        // Draw Ticks
+        for (let i = 0; i < 60; i++) {
+            const angle = (i * 6 - 90) * (Math.PI / 180);
+            const isHour = i % 5 === 0;
+            const startDist = 130;
+            const endDist = isHour ? 145 : 140;
+            
+            ctx.beginPath();
+            ctx.lineWidth = isHour ? 3 : 1;
+            ctx.moveTo(150 + startDist * Math.cos(angle), 150 + startDist * Math.sin(angle));
+            ctx.lineTo(150 + endDist * Math.cos(angle), 150 + endDist * Math.sin(angle));
+            ctx.stroke();
+        }
+
+        // Draw Hands
+        drawHand((currentH % 12) * 30 + currentM * 0.5, 70, 5); // Hour
+        drawHand(currentM * 6, 110, 3); // Minute
+    }
+
+    function drawHand(deg, length, width) {
+        const angle = (deg - 90) * (Math.PI / 180);
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.lineCap = 'round';
+        ctx.moveTo(150, 150);
+        ctx.lineTo(150 + length * Math.cos(angle), 150 + length * Math.sin(angle));
+        ctx.stroke();
+    }
+
+    function handleButtonClick() {
+        if (timeDisplay.style.visibility === 'visible') {
+            // If currently visible, hide it and generate a new time
+            timeDisplay.style.visibility = 'hidden';
+            currentH = Math.floor(Math.random() * 12) + 1;
+            currentM = Math.floor(Math.random() * 60);
+            timeDisplay.innerText = `${currentH}:${currentM.toString().padStart(2, '0')}`;
+            drawClock();
+        } else {
+            // If currently hidden, reveal it
+            timeDisplay.style.visibility = 'visible';
+        }
+    }
+
+    // Initialize with a time
+    currentH = Math.floor(Math.random() * 12) + 1;
+    currentM = Math.floor(Math.random() * 60);
+    timeDisplay.innerText = `${currentH}:${currentM.toString().padStart(2, '0')}`;
+    drawClock();
+</script>
+</body>
+</html>
